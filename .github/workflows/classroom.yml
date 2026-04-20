@@ -1,0 +1,57 @@
+name: Autograding Tests
+
+on:
+  push:
+  workflow_dispatch:
+  repository_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+
+      - uses: actions/setup-go@v5
+        with: { go-version: '1.22' }
+
+      - name: Code compiles
+        id: compile
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Code compiles
+          setup-command: ''
+          command: bash .github/classroom/compile.sh
+          timeout: 10
+          max-score: 50
+
+      - name: No hardcoded secrets
+        id: secrets
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: No hardcoded secrets
+          setup-command: curl -sSL https://github.com/gitleaks/gitleaks/releases/download/v8.21.2/gitleaks_8.21.2_linux_x64.tar.gz | sudo tar -xz -C /usr/local/bin gitleaks
+          command: gitleaks detect --source . --redact --no-banner
+          timeout: 5
+          max-score: 50
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          COMPILE_RESULTS: "${{ steps.compile.outputs.result }}"
+          SECRETS_RESULTS: "${{ steps.secrets.outputs.result }}"
+        with:
+          runners: compile,secrets

@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "Code compiles",
+      "setup": "",
+      "run": "bash .github/classroom/compile.sh",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 50
+    },
+    {
+      "name": "No hardcoded secrets",
+      "setup": "curl -sSL https://github.com/gitleaks/gitleaks/releases/download/v8.21.2/gitleaks_8.21.2_linux_x64.tar.gz | tar -xz -C /usr/local/bin gitleaks",
+      "run": "gitleaks detect --source . --redact --no-banner",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 50
+    }
+  ]
+}
