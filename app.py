@@ -142,12 +142,14 @@ st.markdown(
 
         div[data-testid="stMetricLabel"],
         div[data-testid="stMetricLabel"] p {
-            color: #cbd5e1 !important;
+            color: rgba(255, 255, 255, 0.72) !important;
             font-weight: 500;
         }
 
         div[data-testid="stMetricValue"],
-        div[data-testid="stMetricValue"] div {
+        div[data-testid="stMetricValue"] div,
+        div[data-testid="stMetricValue"] [data-testid="stMarkdownContainer"],
+        div[data-testid="stMetricValue"] p {
             color: #ffffff !important;
             font-weight: 800;
             letter-spacing: -0.02em;
@@ -175,9 +177,35 @@ st.markdown(
         }
 
         .stTextInput input {
+            background: rgba(15, 23, 42, 0.86);
             border-radius: 12px;
+            color: #f9fafb;
             padding: 0.65rem;
             border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .stTextInput label,
+        .stTextInput label p,
+        div[data-testid="stWidgetLabel"],
+        div[data-testid="stWidgetLabel"] p {
+            color: rgba(255, 255, 255, 0.88) !important;
+            font-weight: 600;
+        }
+
+        .stTextInput input::placeholder {
+            color: rgba(255, 255, 255, 0.48) !important;
+            opacity: 1;
+        }
+
+        div[data-testid="stAlert"] {
+            background: rgba(30, 41, 59, 0.82);
+            border: 1px solid rgba(129, 140, 248, 0.28);
+            color: #e5e7eb;
+        }
+
+        div[data-testid="stAlert"] *,
+        div[data-testid="stAlert"] p {
+            color: #e5e7eb !important;
         }
 
         hr {
