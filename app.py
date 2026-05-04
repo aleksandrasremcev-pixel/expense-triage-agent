@@ -211,6 +211,20 @@ st.markdown(
         hr {
             border-color: rgba(255, 255, 255, 0.08);
         }
+
+        [data-testid="stMetricLabel"] p {
+            color: rgba(255, 255, 255, 0.75) !important;
+            font-weight: 600 !important;
+        }
+
+        [data-testid="stMetricLabel"] {
+            color: rgba(255, 255, 255, 0.75) !important;
+        }
+
+        [data-testid="stMetricValue"] {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+        }
     </style>
     <div class="hero hero-card">
         <h1>💸 Expense Triage Agent</h1>
