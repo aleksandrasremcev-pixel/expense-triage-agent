@@ -38,6 +38,14 @@ st.markdown(
             padding: 1.4rem;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(10px);
+            color: #f9fafb;
+        }
+
+        .custom-card *,
+        .hero-card *,
+        .step-card *,
+        .empty-state-card * {
+            color: inherit;
         }
 
         .step-card:hover,
@@ -129,6 +137,25 @@ st.markdown(
             border-radius: 16px;
             padding: 1.25rem;
             box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+            color: #f9fafb;
+        }
+
+        div[data-testid="stMetricLabel"],
+        div[data-testid="stMetricLabel"] p {
+            color: #cbd5e1 !important;
+            font-weight: 500;
+        }
+
+        div[data-testid="stMetricValue"],
+        div[data-testid="stMetricValue"] div {
+            color: #ffffff !important;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        div[data-testid="stMetricDelta"],
+        div[data-testid="stMetricDelta"] div {
+            color: #a5b4fc !important;
         }
 
         .stButton > button {
