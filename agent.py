@@ -29,8 +29,16 @@ def build_agent(csv_data: str) -> FunctionAgent:
         is_chat_model=True,
         context_window=128000,
     )
+    # streaming=True uses astream_chat_with_tools, which some OpenAI-compatible
+    # backends mishandle: tool_calls never populate and the model leaves markers
+    # like "{{tool_call}}" in plain text. Non-streaming achat usually fixes that.
+    # initial_tool_choice="required" nudges the API to return real tool_calls on
+    # the first turn (falls back via env if a provider rejects "required").
+    _first_tool = os.environ.get("AGENT_FIRST_TOOL_CHOICE", "required")
     return FunctionAgent(
         tools=make_tools(csv_data),
         llm=llm,
         system_prompt=SYSTEM_PROMPT,
+        streaming=False,
+        initial_tool_choice=_first_tool if _first_tool else None,
     )
